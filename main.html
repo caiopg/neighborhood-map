@@ -19,12 +19,14 @@
         <h5>São Paulo, SP - Brazil</h5>
       </div>
     </header>
-    <section id="map-container">
-    </section>
+    <section id="map-container"></section>
     <section class="sidemenu-container">
-      <ul data-bind="foreach: mapPoints">
-        <li data-bind="text: name"/>
-      </ul>
+      <div class="sidemenu-close-container">
+        <img class="sidemenu-close" src="./img/ic_close_white_24px.svg" alt="Sidemenu close icon">
+      </div>
+      <div data-bind="foreach: mapPoints">
+        <p data-bind="text: name"/>
+      </div>
     </section>
   </body>
 </html>

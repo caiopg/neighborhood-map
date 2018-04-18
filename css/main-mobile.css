@@ -18,12 +18,6 @@ p, h1, h2, h3, h4, h5 {
   margin: 0px;
 }
 
-ul {
-  list-style-type: none;
-  color: white;
-  padding-left: 0px;
-}
-
 #map-container {
   flex-grow: 1;
 }
@@ -51,5 +45,26 @@ ul {
   position: fixed;
   top: 0;
   background: #000066;
-  visibility: hidden;
+}
+
+.sidemenu-close {
+  height: 24px;
+  width: 24px;
+  padding: 10px;
+}
+
+.sidemenu-close-container {
+  width: 100%;
+  text-align: right;
+}
+
+.sidemenu-container p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  font-size: 0.8em;
+}
+
+.sidemenu-container p:hover {
+  background-color: #0000ff;
 }
