@@ -7,18 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script defer src="js/lib/knockout-3.4.2.js"></script>
     <script defer src="js/model/MapPoint.js"></script>
-    <script defer src="js/viewmodel/ViewModel.js"></script>
     <script defer src="js/controller/MapController.js"></script>
+    <script defer src="js/viewmodel/ViewModel.js"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVSNXm8-UN95He8RtodJDWrgZAPWihxF0&v=3&callback=initMap"></script>
   </head>
   <body>
     <header>
       <img src="./img/ic_menu_white_24px.svg" alt="Sidemenu icon">
-      <h1>Paulista Map</h1>
-      <h5>São Paulo, SP - Brazil</h5>
+      <div class="header-title">
+        <h1>Paulista Map</h1>
+        <h5>São Paulo, SP - Brazil</h5>
+      </div>
     </header>
-    <section class="map-container">
-      <div id="map" />
+    <section id="map-container">
+    </section>
+    <section class="sidemenu-container">
+      <ul data-bind="foreach: mapPoints">
+        <li data-bind="text: name"/>
+      </ul>
     </section>
   </body>
 </html>
