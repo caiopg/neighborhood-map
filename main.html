@@ -13,16 +13,16 @@
   </head>
   <body>
     <header>
-      <img class="header-menu" src="./img/ic_menu_white_24px.svg" alt="Sidemenu icon">
+      <img class="header-menu" src="./img/ic_menu_white_24px.svg" alt="Sidemenu icon" data-bind= "click: openSidemenu">
       <div class="header-title">
         <h1>Paulista Map</h1>
         <h5>São Paulo, SP - Brazil</h5>
       </div>
     </header>
     <section id="map-container"></section>
-    <section class="sidemenu-container">
+    <section class="sidemenu-container" data-bind= "style: { width: sidemenuOpen() ? '50%' : '0%' }">
       <div class="sidemenu-close-container">
-        <img class="sidemenu-close" src="./img/ic_close_white_24px.svg" alt="Sidemenu close icon">
+        <img class="sidemenu-close" src="./img/ic_close_white_24px.svg" alt="Sidemenu close icon" data-bind= "click: closeSidemenu">
       </div>
       <div data-bind="foreach: mapPoints">
         <p data-bind="text: name"/>
