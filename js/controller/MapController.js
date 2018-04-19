@@ -26,17 +26,62 @@ var initialPoints = [
   }
 ]
 
+var defaultMarkerColor = '0091ff';
+var highlightedMarkerColor = 'ffff24';
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map-container'), {
-    center: {lat: -23.563163, lng: -46.6552573 },
+    center: {lat: -23.557736, lng: -46.660912 },
     zoom: 14
   });
+
+  var infoWindow = new google.maps.InfoWindow();
 
   initialPoints.forEach(function(mapPoint) {
     var marker = new google.maps.Marker({
       position: {lat: mapPoint.lat, lng: mapPoint.lng},
       map: map,
-      title: mapPoint.name
+      title: mapPoint.name,
+      animation: google.maps.Animation.DROP,
+      icon: colorMarker(defaultMarkerColor)
     });
+
+    marker.addListener('click', function() {
+      marker.setIcon(colorMarker(highlightedMarkerColor));
+      populateInfoWindow(map, this, infoWindow);
+    });
+
+    marker.addListener('');
   });
+}
+
+function populateInfoWindow(map, marker, infoWindow) {
+  if(infoWindow.marker != marker) {
+    if(infoWindow.marker != null) {
+      infoWindow.marker.setIcon(colorMarker(defaultMarkerColor));
+    }
+
+    infoWindow.marker = marker;
+    infoWindow.setContent('<div>test</div>');
+    infoWindow.open(map, marker);
+
+    infoWindow.addListener('closeclick', function() {
+      if(infoWindow.marker != null) {
+        infoWindow.marker.setIcon(colorMarker(defaultMarkerColor));
+      }
+      infoWindow.marker = null;
+    });
+  }
+}
+
+function colorMarker(color) {
+  var markerImage = new google.maps.MarkerImage(
+    'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' +
+    color + '|40|_|%E2%80%A2',
+    new google.maps.Size(21, 34),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(10, 34),
+    new google.maps.Size(21,34));
+
+    return markerImage;
 }
