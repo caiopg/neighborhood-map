@@ -25,7 +25,7 @@
         <img class="sidemenu-close" src="./img/ic_close_white_24px.svg" alt="Sidemenu close icon" data-bind= "click: closeSidemenu">
       </div>
       <div data-bind="foreach: mapPoints">
-        <p data-bind="text: name"/>
+        <p data-bind="text: name, click: $parent.onMapPointClicked, style: { 'background-color': active() ? '#0000ff' : '#000066'}"/>
       </div>
     </section>
   </body>
