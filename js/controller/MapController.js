@@ -25,9 +25,9 @@ var initialPoints = [
   },
   {
     id : 5,
-    name : "O'Malley's Bar",
-    lat : -23.558311,
-    lng : -46.665982
+    name : "Trianon Park",
+    lat : -23.561815,
+    lng : -46.657767
   }
 ]
 
@@ -75,13 +75,29 @@ function populateInfoWindow(marker, infoWindow) {
     }
 
     infoWindow.marker = marker;
-    infoWindow.setContent('<div>test</div>');
-    infoWindow.open(map, marker);
-
     infoWindow.addListener('closeclick', function() {
       deactivateMarker();
     });
+
+    fetchWikiInfo(marker.title, function(response) {
+      infoWindow.setContent(createContent(response, marker));
+      infoWindow.open(map, marker);
+    });
   }
+}
+
+function createContent(response, marker) {
+  var content = '<div class=\"info-window\"><h2>' + marker.title + '</h2></div>';
+
+  var title = response[0];
+  var url = response[3];
+  if(url != null && url.length > 0) {
+    content = content.concat('<div>More info: </div><a href=' + url + '>' + title + '</a>')
+  } else {
+    content = content.concat('<div>No information found about ' + title + '.</div>')
+  }
+
+  return content;
 }
 
 function deactivateMarker() {
