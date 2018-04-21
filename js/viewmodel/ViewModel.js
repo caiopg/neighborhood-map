@@ -17,14 +17,13 @@ var ViewModel = function() {
   };
 
   this.onMapPointClicked = function(mapPoint) {
-    // MapController.activateMarker(mapPoint);
-
-    var i;
     var points = self.mapPoints();
-    for(i = 0; i < points.length; i++) {
+    for(var i = 0; i < points.length; i++) {
       var mp = points[i];
       mp.active(mp.id == mapPoint.id);
     }
+
+    activateMarker(mapPoint);
   }
 };
 

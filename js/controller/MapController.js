@@ -33,6 +33,7 @@ var initialPoints = [
 
 var defaultMarkerColor = '0091ff';
 var highlightedMarkerColor = 'ffff24';
+var markers = [];
 var infoWindow;
 var map;
 
@@ -46,6 +47,7 @@ function initMap() {
 
   initialPoints.forEach(function(mapPoint) {
     var marker = new google.maps.Marker({
+      id: mapPoint.id,
       position: {lat: mapPoint.lat, lng: mapPoint.lng},
       map: map,
       title: mapPoint.name,
@@ -54,10 +56,16 @@ function initMap() {
     });
 
     marker.addListener('click', function() {
-      marker.setIcon(colorMarker(highlightedMarkerColor));
-      populateInfoWindow(this, infoWindow);
+      onMarkerClicked(this);
     });
+
+    markers.push(marker);
   });
+}
+
+function onMarkerClicked(marker) {
+  marker.setIcon(colorMarker(highlightedMarkerColor));
+  populateInfoWindow(marker, infoWindow);
 }
 
 function populateInfoWindow(marker, infoWindow) {
@@ -71,17 +79,25 @@ function populateInfoWindow(marker, infoWindow) {
     infoWindow.open(map, marker);
 
     infoWindow.addListener('closeclick', function() {
-      if(infoWindow.marker != null) {
-        infoWindow.marker.setIcon(colorMarker(defaultMarkerColor));
-      }
-
-      infoWindow.marker = null;
+      deactivateMarker();
     });
   }
 }
 
+function deactivateMarker() {
+  if(infoWindow.marker != null) {
+    infoWindow.marker.setIcon(colorMarker(defaultMarkerColor));
+  }
+
+  infoWindow.marker = null;
+}
+
 function activateMarker(mapPoint) {
-  infoWindow.closeclick();
+  for (var i = 0; i < markers.length; i++) {
+    if(markers[i].id == mapPoint.id) {
+      onMarkerClicked(markers[i]);
+    }
+  }
 }
 
 function colorMarker(color) {
