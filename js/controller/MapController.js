@@ -83,11 +83,15 @@ function onMarkerClicked(marker) {
 function populateInfoWindow(marker, infoWindow) {
   if(infoWindow.marker != marker) {
     if(infoWindow.marker != null) {
+      viewModel.deactivateMapPoint(infoWindow.marker.id);
       infoWindow.marker.setIcon(colorMarker(defaultMarkerColor));
     }
 
     infoWindow.marker = marker;
+    viewModel.activateMapPoint(marker.id);
+
     infoWindow.addListener('closeclick', function() {
+      viewModel.deactivateMapPoint(infoWindow.marker.id);
       deactivateMarker();
     });
 

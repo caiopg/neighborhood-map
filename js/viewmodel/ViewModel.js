@@ -28,7 +28,6 @@ var ViewModel = function() {
   }
 
   this.onFilterList = function(data) {
-
     self.mapPoints().forEach(function(mapPoint) {
       if(mapPoint.name.toUpperCase().includes(data.filterText().toUpperCase())) {
         mapPoint.filtered(false);
@@ -38,6 +37,22 @@ var ViewModel = function() {
     });
 
     updateMap();
+  }
+
+  this.deactivateMapPoint = function(id) {
+    self.mapPoints().forEach(function(mapPoint) {
+      if(mapPoint.id == id) {
+        mapPoint.active(false);
+      }
+    });
+  }
+
+  this.activateMapPoint = function(id) {
+    self.mapPoints().forEach(function(mapPoint) {
+      if(mapPoint.id == id) {
+        mapPoint.active(true);
+      }
+    });
   }
 
   this.mapPoints().forEach(function(mapPoint) {
