@@ -1,3 +1,4 @@
+// ViewModel is the viewmodel used to populate main.html
 var ViewModel = function() {
   var self = this;
 
@@ -5,6 +6,8 @@ var ViewModel = function() {
   this.mapPoints = ko.observableArray([]);
   this.filterText = ko.observable("");
 
+  // This loop is used to populate the mapPoints list with the places which
+  // will be marked on the map.
   initialPoints.forEach(function(mapPoint) {
     self.mapPoints().push(new MapPoint(mapPoint));
   });
@@ -17,6 +20,7 @@ var ViewModel = function() {
     self.sidemenuOpen(false);
   };
 
+  // onMapPointClicked() finds the clicked place and updates it`s status and UI.
   this.onMapPointClicked = function(mapPoint) {
     var points = self.mapPoints();
     for(var i = 0; i < points.length; i++) {
@@ -27,6 +31,7 @@ var ViewModel = function() {
     activateMarker(mapPoint);
   }
 
+  // onFilterList() filters the MapPoints and markers according to search term.
   this.onFilterList = function(data) {
     self.mapPoints().forEach(function(mapPoint) {
       if(mapPoint.name.toUpperCase().includes(data.filterText().toUpperCase())) {
@@ -39,6 +44,7 @@ var ViewModel = function() {
     updateMap();
   }
 
+  // deactivateMapPoint updates the MapPoint status to ser as deactivated.
   this.deactivateMapPoint = function(id) {
     self.mapPoints().forEach(function(mapPoint) {
       if(mapPoint.id == id) {
@@ -47,6 +53,7 @@ var ViewModel = function() {
     });
   }
 
+  // activateMapPoint updates the MapPoint status to ser as activated.
   this.activateMapPoint = function(id) {
     self.mapPoints().forEach(function(mapPoint) {
       if(mapPoint.id == id) {
@@ -55,6 +62,9 @@ var ViewModel = function() {
     });
   }
 
+  // This loop is used to fetch the Wikimedia info for each place on the map.
+  // There would be a delay everytime a user clicked on marker if the info was
+  // fetched at the moment the marker is selected. This loop avoids the delay.
   this.mapPoints().forEach(function(mapPoint) {
     fetchWikiInfo(mapPoint.name, function(response) {
       var url = response[3];

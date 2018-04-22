@@ -1,3 +1,4 @@
+// MapPoint is a representation of a place in the map.
 var MapPoint = function(data) {
   this.id = data.id;
   this.name = data.name;

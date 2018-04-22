@@ -1,3 +1,4 @@
+// initialPoints contains all the initial points used to populate the map.
 var initialPoints = [
   {
     id : 1,
@@ -49,6 +50,7 @@ var markers = [];
 var infoWindow;
 var map;
 
+// initMap() is a callback used when the maps API is finished loading into site.
 function initMap() {
   map = new google.maps.Map(document.getElementById('map-container'), {
     center: {lat: -23.557736, lng: -46.660912 },
@@ -75,11 +77,14 @@ function initMap() {
   });
 }
 
+// onMarkerClicked() updates the marker icon and opens the Info Window.
 function onMarkerClicked(marker) {
   marker.setIcon(colorMarker(highlightedMarkerColor));
   populateInfoWindow(marker, infoWindow);
 }
 
+// populateInfoWindow() is used to insert all the content and behavior into
+// the Info Window.
 function populateInfoWindow(marker, infoWindow) {
   if(infoWindow.marker != marker) {
     if(infoWindow.marker != null) {
@@ -100,6 +105,7 @@ function populateInfoWindow(marker, infoWindow) {
   }
 }
 
+// updateMap() updates the visibility of the markers present on the map.
 function updateMap() {
 
   for(var i = 0; i < markers.length; i++) {
@@ -112,6 +118,7 @@ function updateMap() {
   }
 }
 
+// createContent() creates the html which will be inflated into the Info Window.
 function createContent(marker) {
 
   var currentPoint;
@@ -135,6 +142,7 @@ function createContent(marker) {
    return content;
 }
 
+// deactivateMarker() updates the marker icon to set it as deactivate.
 function deactivateMarker() {
   if(infoWindow.marker != null) {
     infoWindow.marker.setIcon(colorMarker(defaultMarkerColor));
@@ -143,6 +151,7 @@ function deactivateMarker() {
   infoWindow.marker = null;
 }
 
+// activateMarker() updates the marker icon to set it as active.
 function activateMarker(mapPoint) {
   for (var i = 0; i < markers.length; i++) {
     if(markers[i].id == mapPoint.id) {
@@ -151,6 +160,7 @@ function activateMarker(mapPoint) {
   }
 }
 
+// colorMarker() colors the selected marker to the color specified in the input.
 function colorMarker(color) {
   var markerImage = new google.maps.MarkerImage(
     'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' +
