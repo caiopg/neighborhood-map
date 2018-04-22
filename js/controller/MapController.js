@@ -28,6 +28,18 @@ var initialPoints = [
     name : "Trianon Park",
     lat : -23.561815,
     lng : -46.657767
+  },
+  {
+    id : 6,
+    name : "Starbucks Paulista",
+    lat : -23.562323,
+    lng: -46.655771
+  },
+  {
+    id : 7,
+    name : "Top Center Shopping",
+    lat : -23.565507,
+    lng: -46.650555
   }
 ]
 
