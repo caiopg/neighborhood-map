@@ -36,6 +36,8 @@ var ViewModel = function() {
         mapPoint.filtered(true);
       }
     });
+
+    updateMap();
   }
 
   this.mapPoints().forEach(function(mapPoint) {

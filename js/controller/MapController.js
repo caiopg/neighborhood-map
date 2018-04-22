@@ -84,6 +84,18 @@ function populateInfoWindow(marker, infoWindow) {
   }
 }
 
+function updateMap() {
+
+  for(var i = 0; i < markers.length; i++) {
+    var marker = markers[i];
+    if(viewModel.mapPoints()[i].filtered()) {
+      marker.setMap(null);
+    } else {
+      marker.setMap(map);
+    }
+  }
+}
+
 function createContent(marker) {
 
   var currentPoint;
