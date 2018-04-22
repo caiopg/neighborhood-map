@@ -43,12 +43,17 @@ p, h1, h2, h3, h4, h5 {
 
 .sidemenu-container {
   height: 100%;
+  width: 0%;
   z-index: 1;
   overflow-x: hidden;
   position: fixed;
   top: 0;
   background: #000066;
   transition: 0.5s;
+}
+
+.sidemenu-container-open {
+  width: 50%;
 }
 
 .sidemenu-close {

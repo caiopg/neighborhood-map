@@ -3,7 +3,9 @@
   <head>
     <title>Paulista Map</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/main-mobile.css" media="screen and (max-width: 749px)">
+    <link rel="stylesheet" type="text/css" href="./css/main-tablet.css" media="screen and (min-width: 750px) and (max-width: 1249px)">
+    <link rel="stylesheet" type="text/css" href="./css/main-desktop.css" media="screen and (min-width: 1250px)">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script defer src="js/lib/knockout-3.4.2.js "></script>
     <script defer src="js/lib/jquery-3.3.1.min.js "></script>
@@ -22,11 +24,11 @@
       </div>
     </header>
     <section id="map-container"></section>
-    <section class="sidemenu-container" data-bind= "style: { width: sidemenuOpen() ? '50%' : '0%' }">
+    <section class="sidemenu-container" data-bind= "css: { 'sidemenu-container-open': sidemenuOpen() }">
       <div class="sidemenu-close-container">
         <img class="sidemenu-close" src="./img/ic_close_white_24px.svg" alt="Sidemenu close icon" data-bind= "click: closeSidemenu">
       </div>
-      <<input type="text" class="sidemenu-filter" data-bind="textInput: filterText, event: { keyup: onFilterList }" placeholder="Search for places..">
+      <input type="text" class="sidemenu-filter" data-bind="textInput: filterText, event: { keyup: onFilterList }" placeholder="Search for places..">
       <div data-bind="foreach: mapPoints">
         <p data-bind="text: name, click: $parent.onMapPointClicked, style: { backgroundColor: active() ? '#0000ff' : '#000066', display: filtered() ? 'none' : 'block'}"/>
       </div>
