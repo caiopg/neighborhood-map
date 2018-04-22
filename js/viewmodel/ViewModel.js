@@ -25,6 +25,16 @@ var ViewModel = function() {
 
     activateMarker(mapPoint);
   }
+
+  this.mapPoints().forEach(function(mapPoint) {
+    fetchWikiInfo(mapPoint.name, function(response) {
+      var url = response[3];
+      if(url != null && url.length > 0) {
+        mapPoint.infoUrl = url;
+      }
+    });
+  });
 };
 
-ko.applyBindings(new ViewModel());
+var viewModel = new ViewModel();
+ko.applyBindings(viewModel);

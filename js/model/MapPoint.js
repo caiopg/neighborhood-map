@@ -4,4 +4,5 @@ var MapPoint = function(data) {
   this.lat = data.lat;
   this.lng = data.lng;
   this.active = ko.observable(false);
+  this.infoUrl = "";
 }

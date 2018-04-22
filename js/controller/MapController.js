@@ -79,25 +79,32 @@ function populateInfoWindow(marker, infoWindow) {
       deactivateMarker();
     });
 
-    fetchWikiInfo(marker.title, function(response) {
-      infoWindow.setContent(createContent(response, marker));
-      infoWindow.open(map, marker);
-    });
+    infoWindow.setContent(createContent(marker));
+    infoWindow.open(map, marker);
   }
 }
 
-function createContent(response, marker) {
-  var content = '<div class=\"info-window\"><h2>' + marker.title + '</h2></div>';
+function createContent(marker) {
 
-  var title = response[0];
-  var url = response[3];
-  if(url != null && url.length > 0) {
-    content = content.concat('<div>More info: </div><a href=' + url + '>' + title + '</a>')
-  } else {
-    content = content.concat('<div>No information found about ' + title + '.</div>')
+  var currentPoint;
+  for(var i = 0; i < viewModel.mapPoints().length; i++) {
+    var point = viewModel.mapPoints()[i];
+    if(marker.id == point.id) {
+      currentPoint = point;
+      break;
+    }
   }
 
-  return content;
+   var title = currentPoint.name;
+   var url = currentPoint.infoUrl;
+   var content = '<div class=\"info-window\"><h2>' + title + '</h2></div>';
+   if(url != null && url.length > 0) {
+     content = content.concat('<div>More info: </div><a href=' + url + '>' + title + '</a>');
+   } else {
+     content = content.concat('<div>No information found about ' + title + '.</div>');
+   }
+
+   return content;
 }
 
 function deactivateMarker() {
