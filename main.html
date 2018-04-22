@@ -26,8 +26,9 @@
       <div class="sidemenu-close-container">
         <img class="sidemenu-close" src="./img/ic_close_white_24px.svg" alt="Sidemenu close icon" data-bind= "click: closeSidemenu">
       </div>
+      <<input type="text" class="sidemenu-filter" data-bind="textInput: filterText, event: { keyup: onFilterList }" placeholder="Search for places..">
       <div data-bind="foreach: mapPoints">
-        <p data-bind="text: name, click: $parent.onMapPointClicked, style: { 'background-color': active() ? '#0000ff' : '#000066'}"/>
+        <p data-bind="text: name, click: $parent.onMapPointClicked, style: { backgroundColor: active() ? '#0000ff' : '#000066', display: filtered() ? 'none' : 'block'}"/>
       </div>
     </section>
   </body>

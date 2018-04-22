@@ -3,6 +3,7 @@ var MapPoint = function(data) {
   this.name = data.name;
   this.lat = data.lat;
   this.lng = data.lng;
-  this.active = ko.observable(false);
   this.infoUrl = "";
+  this.active = ko.observable(false);
+  this.filtered = ko.observable(false);
 }

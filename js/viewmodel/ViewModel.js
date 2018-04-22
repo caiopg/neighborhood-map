@@ -3,9 +3,10 @@ var ViewModel = function() {
 
   this.sidemenuOpen = ko.observable(false);
   this.mapPoints = ko.observableArray([]);
+  this.filterText = ko.observable("");
 
   initialPoints.forEach(function(mapPoint) {
-    self.mapPoints.push(new MapPoint(mapPoint));
+    self.mapPoints().push(new MapPoint(mapPoint));
   });
 
   this.openSidemenu = function() {
@@ -26,6 +27,17 @@ var ViewModel = function() {
     activateMarker(mapPoint);
   }
 
+  this.onFilterList = function(data) {
+
+    self.mapPoints().forEach(function(mapPoint) {
+      if(mapPoint.name.toUpperCase().includes(data.filterText().toUpperCase())) {
+        mapPoint.filtered(false);
+      } else {
+        mapPoint.filtered(true);
+      }
+    });
+  }
+
   this.mapPoints().forEach(function(mapPoint) {
     fetchWikiInfo(mapPoint.name, function(response) {
       var url = response[3];
@@ -34,6 +46,7 @@ var ViewModel = function() {
       }
     });
   });
+
 };
 
 var viewModel = new ViewModel();
