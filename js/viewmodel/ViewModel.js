@@ -74,7 +74,7 @@ var ViewModel = function() {
       }
     }, function() {
       if(!self.alertOpened) {
-        alert("Não foi possivel encontrar informações dos locais.");
+        alert("We were enable to fetch information about the places. =/");
         self.alertOpened = true;
       }
     });
