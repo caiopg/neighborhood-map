@@ -6,3 +6,6 @@ This repository is the source code for a website with some places in the Paulist
 2. Open folder where project was cloned into.
 3. Open `main.html` with your browser of preference.
 8. Enjoy!
+
+## Credits
+1. Wikimedia API
