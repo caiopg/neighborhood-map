@@ -172,3 +172,7 @@ function colorMarker(color) {
 
     return markerImage;
 }
+
+function onMapsError() {
+  alert("Unable to load google maps.")
+}
