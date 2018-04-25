@@ -96,7 +96,7 @@ function populateInfoWindow(marker, infoWindow) {
     viewModel.activateMapPoint(marker.id);
 
     infoWindow.addListener('closeclick', function() {
-      viewModel.deactivateMapPoint(infoWindow.marker.id);
+      viewModel.deactivateMapPoint(marker.id);
       deactivateMarker();
     });
 
