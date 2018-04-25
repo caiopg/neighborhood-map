@@ -1,6 +1,6 @@
 // fetchWikiInfo() fetches the information regarding a specific location from
 //  Wikimedia API.
-function fetchWikiInfo(place, successCallback) {
+function fetchWikiInfo(place, successCallback, errorCallback) {
   var url = "http://en.wikipedia.org/w/api.php?action=opensearch&search="
   + place + "&format=json&callback=wikiInfoCallback";
 
@@ -10,6 +10,9 @@ function fetchWikiInfo(place, successCallback) {
     cache: "true",
     success: function(response) {
       successCallback(response);
+    },
+    error: function(response) {
+      errorCallback();
     }
   });
 }
